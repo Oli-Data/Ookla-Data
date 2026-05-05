@@ -1,4 +1,5 @@
 # Ookla Mobile Broadband Equity Analysis
+### A CO³ Labs Study | Christian Olivares-Rodriguez
 > Analyzing the mobile broadband divide across California using real-world speed data from Ookla Open Data (2020–2025)
 
 ---

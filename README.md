@@ -124,5 +124,3 @@ Taken together, the rural/urban comparison is the one pattern that holds consist
  
 ---
 *Analysis by Christian Olivares | CO³ Labs LLC*
-
-*Analysis by Christian Olivares | CO³ Labs LLC*

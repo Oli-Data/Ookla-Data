@@ -1,1 +1,8 @@
 .env
+.ookla-cache/
+.ookla-backups/
+__pycache__/
+
+.venv/
+
+.ipynb_checkpoints/

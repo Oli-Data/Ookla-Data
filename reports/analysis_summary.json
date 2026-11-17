@@ -1,0 +1,888 @@
+{
+  "generated_at_utc": "2026-11-14T07:58:44.171251+00:00",
+  "python_version": "3.13.3",
+  "package_versions": {
+    "pandas": "2.3.2",
+    "numpy": "2.3.3",
+    "pyarrow": "23.0.1",
+    "geopandas": "1.1.3",
+    "shapely": "2.1.2",
+    "folium": "0.20.0",
+    "matplotlib": "3.10.6",
+    "census": "0.8.26",
+    "statsmodels": "0.14.6"
+  },
+  "inputs": {
+    "Central_Valley": {
+      "records": 423452,
+      "unique_tiles": 71469,
+      "quarter_counts": [
+        {
+          "year": 2020,
+          "quarter": 1,
+          "observations": 18662
+        },
+        {
+          "year": 2020,
+          "quarter": 2,
+          "observations": 19381
+        },
+        {
+          "year": 2020,
+          "quarter": 3,
+          "observations": 21940
+        },
+        {
+          "year": 2020,
+          "quarter": 4,
+          "observations": 21718
+        },
+        {
+          "year": 2021,
+          "quarter": 1,
+          "observations": 20992
+        },
+        {
+          "year": 2021,
+          "quarter": 2,
+          "observations": 21525
+        },
+        {
+          "year": 2021,
+          "quarter": 3,
+          "observations": 20645
+        },
+        {
+          "year": 2021,
+          "quarter": 4,
+          "observations": 19741
+        },
+        {
+          "year": 2022,
+          "quarter": 1,
+          "observations": 18616
+        },
+        {
+          "year": 2022,
+          "quarter": 2,
+          "observations": 19006
+        },
+        {
+          "year": 2022,
+          "quarter": 3,
+          "observations": 18623
+        },
+        {
+          "year": 2022,
+          "quarter": 4,
+          "observations": 18647
+        },
+        {
+          "year": 2023,
+          "quarter": 1,
+          "observations": 17321
+        },
+        {
+          "year": 2023,
+          "quarter": 2,
+          "observations": 18019
+        },
+        {
+          "year": 2023,
+          "quarter": 3,
+          "observations": 17397
+        },
+        {
+          "year": 2023,
+          "quarter": 4,
+          "observations": 16026
+        },
+        {
+          "year": 2024,
+          "quarter": 1,
+          "observations": 16452
+        },
+        {
+          "year": 2024,
+          "quarter": 2,
+          "observations": 16004
+        },
+        {
+          "year": 2024,
+          "quarter": 3,
+          "observations": 15717
+        },
+        {
+          "year": 2024,
+          "quarter": 4,
+          "observations": 14183
+        },
+        {
+          "year": 2025,
+          "quarter": 1,
+          "observations": 13244
+        },
+        {
+          "year": 2025,
+          "quarter": 2,
+          "observations": 13305
+        },
+        {
+          "year": 2025,
+          "quarter": 3,
+          "observations": 12944
+        },
+        {
+          "year": 2025,
+          "quarter": 4,
+          "observations": 13344
+        }
+      ],
+      "duplicate_tile_quarters": 0
+    },
+    "SoCal": {
+      "records": 667622,
+      "unique_tiles": 63869,
+      "quarter_counts": [
+        {
+          "year": 2020,
+          "quarter": 1,
+          "observations": 30674
+        },
+        {
+          "year": 2020,
+          "quarter": 2,
+          "observations": 30175
+        },
+        {
+          "year": 2020,
+          "quarter": 3,
+          "observations": 32656
+        },
+        {
+          "year": 2020,
+          "quarter": 4,
+          "observations": 33348
+        },
+        {
+          "year": 2021,
+          "quarter": 1,
+          "observations": 32591
+        },
+        {
+          "year": 2021,
+          "quarter": 2,
+          "observations": 31902
+        },
+        {
+          "year": 2021,
+          "quarter": 3,
+          "observations": 30801
+        },
+        {
+          "year": 2021,
+          "quarter": 4,
+          "observations": 31079
+        },
+        {
+          "year": 2022,
+          "quarter": 1,
+          "observations": 29810
+        },
+        {
+          "year": 2022,
+          "quarter": 2,
+          "observations": 29539
+        },
+        {
+          "year": 2022,
+          "quarter": 3,
+          "observations": 29074
+        },
+        {
+          "year": 2022,
+          "quarter": 4,
+          "observations": 29094
+        },
+        {
+          "year": 2023,
+          "quarter": 1,
+          "observations": 28305
+        },
+        {
+          "year": 2023,
+          "quarter": 2,
+          "observations": 27848
+        },
+        {
+          "year": 2023,
+          "quarter": 3,
+          "observations": 26748
+        },
+        {
+          "year": 2023,
+          "quarter": 4,
+          "observations": 26257
+        },
+        {
+          "year": 2024,
+          "quarter": 1,
+          "observations": 26140
+        },
+        {
+          "year": 2024,
+          "quarter": 2,
+          "observations": 25253
+        },
+        {
+          "year": 2024,
+          "quarter": 3,
+          "observations": 24414
+        },
+        {
+          "year": 2024,
+          "quarter": 4,
+          "observations": 23877
+        },
+        {
+          "year": 2025,
+          "quarter": 1,
+          "observations": 22643
+        },
+        {
+          "year": 2025,
+          "quarter": 2,
+          "observations": 21950
+        },
+        {
+          "year": 2025,
+          "quarter": 3,
+          "observations": 21247
+        },
+        {
+          "year": 2025,
+          "quarter": 4,
+          "observations": 22197
+        }
+      ],
+      "duplicate_tile_quarters": 0
+    },
+    "Bay_Area": {
+      "records": 239715,
+      "unique_tiles": 26912,
+      "quarter_counts": [
+        {
+          "year": 2020,
+          "quarter": 1,
+          "observations": 10494
+        },
+        {
+          "year": 2020,
+          "quarter": 2,
+          "observations": 10753
+        },
+        {
+          "year": 2020,
+          "quarter": 3,
+          "observations": 11809
+        },
+        {
+          "year": 2020,
+          "quarter": 4,
+          "observations": 12303
+        },
+        {
+          "year": 2021,
+          "quarter": 1,
+          "observations": 11678
+        },
+        {
+          "year": 2021,
+          "quarter": 2,
+          "observations": 12027
+        },
+        {
+          "year": 2021,
+          "quarter": 3,
+          "observations": 11595
+        },
+        {
+          "year": 2021,
+          "quarter": 4,
+          "observations": 11406
+        },
+        {
+          "year": 2022,
+          "quarter": 1,
+          "observations": 10753
+        },
+        {
+          "year": 2022,
+          "quarter": 2,
+          "observations": 10662
+        },
+        {
+          "year": 2022,
+          "quarter": 3,
+          "observations": 10605
+        },
+        {
+          "year": 2022,
+          "quarter": 4,
+          "observations": 10494
+        },
+        {
+          "year": 2023,
+          "quarter": 1,
+          "observations": 9839
+        },
+        {
+          "year": 2023,
+          "quarter": 2,
+          "observations": 9863
+        },
+        {
+          "year": 2023,
+          "quarter": 3,
+          "observations": 9647
+        },
+        {
+          "year": 2023,
+          "quarter": 4,
+          "observations": 9106
+        },
+        {
+          "year": 2024,
+          "quarter": 1,
+          "observations": 9315
+        },
+        {
+          "year": 2024,
+          "quarter": 2,
+          "observations": 8977
+        },
+        {
+          "year": 2024,
+          "quarter": 3,
+          "observations": 9113
+        },
+        {
+          "year": 2024,
+          "quarter": 4,
+          "observations": 8468
+        },
+        {
+          "year": 2025,
+          "quarter": 1,
+          "observations": 7918
+        },
+        {
+          "year": 2025,
+          "quarter": 2,
+          "observations": 7670
+        },
+        {
+          "year": 2025,
+          "quarter": 3,
+          "observations": 7469
+        },
+        {
+          "year": 2025,
+          "quarter": 4,
+          "observations": 7751
+        }
+      ],
+      "duplicate_tile_quarters": 0
+    }
+  },
+  "qualifying_unique_cached_observations": 60728,
+  "county_assignment_counts": {
+    "Southern California": 37487,
+    "Bay Area": 12648,
+    "Central Valley": 6837,
+    "Other matched CA county": 2251,
+    "Unmatched": 1505
+  },
+  "study_observations": 56972,
+  "unmatched_demographic_observations": 0,
+  "census_tracts": 9129,
+  "zero_poverty_universe_tracts": 76,
+  "annual_results": [
+    {
+      "year": 2020,
+      "region": "Bay Area",
+      "download_mbps": 52.058,
+      "observations": 2657
+    },
+    {
+      "year": 2020,
+      "region": "Central Valley",
+      "download_mbps": 34.923,
+      "observations": 1245
+    },
+    {
+      "year": 2020,
+      "region": "Southern California",
+      "download_mbps": 43.937,
+      "observations": 8688
+    },
+    {
+      "year": 2021,
+      "region": "Bay Area",
+      "download_mbps": 78.5695,
+      "observations": 3238
+    },
+    {
+      "year": 2021,
+      "region": "Central Valley",
+      "download_mbps": 76.566,
+      "observations": 1677
+    },
+    {
+      "year": 2021,
+      "region": "Southern California",
+      "download_mbps": 75.6585,
+      "observations": 9580
+    },
+    {
+      "year": 2022,
+      "region": "Bay Area",
+      "download_mbps": 142.9505,
+      "observations": 2598
+    },
+    {
+      "year": 2022,
+      "region": "Central Valley",
+      "download_mbps": 131.701,
+      "observations": 1323
+    },
+    {
+      "year": 2022,
+      "region": "Southern California",
+      "download_mbps": 156.895,
+      "observations": 7738
+    },
+    {
+      "year": 2023,
+      "region": "Bay Area",
+      "download_mbps": 184.33,
+      "observations": 1693
+    },
+    {
+      "year": 2023,
+      "region": "Central Valley",
+      "download_mbps": 176.212,
+      "observations": 1077
+    },
+    {
+      "year": 2023,
+      "region": "Southern California",
+      "download_mbps": 196.2625,
+      "observations": 5096
+    },
+    {
+      "year": 2024,
+      "region": "Bay Area",
+      "download_mbps": 255.137,
+      "observations": 1448
+    },
+    {
+      "year": 2024,
+      "region": "Central Valley",
+      "download_mbps": 257.678,
+      "observations": 864
+    },
+    {
+      "year": 2024,
+      "region": "Southern California",
+      "download_mbps": 249.431,
+      "observations": 3647
+    },
+    {
+      "year": 2025,
+      "region": "Bay Area",
+      "download_mbps": 263.761,
+      "observations": 1014
+    },
+    {
+      "year": 2025,
+      "region": "Central Valley",
+      "download_mbps": 267.467,
+      "observations": 651
+    },
+    {
+      "year": 2025,
+      "region": "Southern California",
+      "download_mbps": 276.4945,
+      "observations": 2738
+    }
+  ],
+  "equity_gap": [
+    {
+      "year": 2020,
+      "CV Download (Mbps)": 34.92,
+      "Bay Download (Mbps)": 52.06,
+      "Download Gap (Mbps)": 17.13,
+      "Bay download advantage vs CV (%)": 49.1,
+      "CV Upload (Mbps)": 10.76,
+      "Bay Upload (Mbps)": 15.74,
+      "Upload Gap (Mbps)": 4.98,
+      "CV Latency (ms)": 32.0,
+      "Bay Latency (ms)": 30.0,
+      "Latency Gap (ms)": 2.0
+    },
+    {
+      "year": 2021,
+      "CV Download (Mbps)": 76.57,
+      "Bay Download (Mbps)": 78.57,
+      "Download Gap (Mbps)": 2.0,
+      "Bay download advantage vs CV (%)": 2.6,
+      "CV Upload (Mbps)": 17.23,
+      "Bay Upload (Mbps)": 17.66,
+      "Upload Gap (Mbps)": 0.43,
+      "CV Latency (ms)": 30.0,
+      "Bay Latency (ms)": 30.0,
+      "Latency Gap (ms)": 0.0
+    },
+    {
+      "year": 2022,
+      "CV Download (Mbps)": 131.7,
+      "Bay Download (Mbps)": 142.95,
+      "Download Gap (Mbps)": 11.25,
+      "Bay download advantage vs CV (%)": 8.5,
+      "CV Upload (Mbps)": 19.94,
+      "Bay Upload (Mbps)": 22.8,
+      "Upload Gap (Mbps)": 2.86,
+      "CV Latency (ms)": 28.0,
+      "Bay Latency (ms)": 30.0,
+      "Latency Gap (ms)": -2.0
+    },
+    {
+      "year": 2023,
+      "CV Download (Mbps)": 176.21,
+      "Bay Download (Mbps)": 184.33,
+      "Download Gap (Mbps)": 8.12,
+      "Bay download advantage vs CV (%)": 4.6,
+      "CV Upload (Mbps)": 22.55,
+      "Bay Upload (Mbps)": 25.98,
+      "Upload Gap (Mbps)": 3.43,
+      "CV Latency (ms)": 28.0,
+      "Bay Latency (ms)": 28.0,
+      "Latency Gap (ms)": 0.0
+    },
+    {
+      "year": 2024,
+      "CV Download (Mbps)": 257.68,
+      "Bay Download (Mbps)": 255.14,
+      "Download Gap (Mbps)": -2.54,
+      "Bay download advantage vs CV (%)": -1.0,
+      "CV Upload (Mbps)": 27.47,
+      "Bay Upload (Mbps)": 29.08,
+      "Upload Gap (Mbps)": 1.6,
+      "CV Latency (ms)": 25.0,
+      "Bay Latency (ms)": 27.0,
+      "Latency Gap (ms)": -2.0
+    },
+    {
+      "year": 2025,
+      "CV Download (Mbps)": 267.47,
+      "Bay Download (Mbps)": 263.76,
+      "Download Gap (Mbps)": -3.71,
+      "Bay download advantage vs CV (%)": -1.4,
+      "CV Upload (Mbps)": 31.19,
+      "Bay Upload (Mbps)": 29.91,
+      "Upload Gap (Mbps)": -1.28,
+      "CV Latency (ms)": 22.0,
+      "Bay Latency (ms)": 24.0,
+      "Latency Gap (ms)": -2.0
+    }
+  ],
+  "urban_rural_2022_2024": {
+    "Central_Valley": [
+      {
+        "urban_class": "Urban",
+        "observations": 2660,
+        "unique_tiles": 1513,
+        "median_download_mbps": 185.8045,
+        "observation_share_pct": 81.4950980392
+      },
+      {
+        "urban_class": "Rural",
+        "observations": 604,
+        "unique_tiles": 440,
+        "median_download_mbps": 119.3785,
+        "observation_share_pct": 18.5049019608
+      }
+    ],
+    "SoCal": [
+      {
+        "urban_class": "Urban",
+        "observations": 15940,
+        "unique_tiles": 6763,
+        "median_download_mbps": 190.102,
+        "observation_share_pct": 96.7174321946
+      },
+      {
+        "urban_class": "Rural",
+        "observations": 541,
+        "unique_tiles": 357,
+        "median_download_mbps": 79.73,
+        "observation_share_pct": 3.2825678054
+      }
+    ],
+    "Bay_Area": [
+      {
+        "urban_class": "Urban",
+        "observations": 5514,
+        "unique_tiles": 2417,
+        "median_download_mbps": 182.1625,
+        "observation_share_pct": 96.0794563513
+      },
+      {
+        "urban_class": "Rural",
+        "observations": 225,
+        "unique_tiles": 168,
+        "median_download_mbps": 180.881,
+        "observation_share_pct": 3.9205436487
+      }
+    ]
+  },
+  "income_brackets_2022_2024": {
+    "Central_Valley": [
+      {
+        "income_bracket": "<$40k",
+        "median_download_mbps": 205.0885,
+        "observations": 206,
+        "unique_tiles": 107
+      },
+      {
+        "income_bracket": "$40\u2013<70k",
+        "median_download_mbps": 170.7345,
+        "observations": 1124,
+        "unique_tiles": 663
+      },
+      {
+        "income_bracket": "$70\u2013<100k",
+        "median_download_mbps": 177.039,
+        "observations": 1041,
+        "unique_tiles": 656
+      },
+      {
+        "income_bracket": "$100\u2013<150k",
+        "median_download_mbps": 168.438,
+        "observations": 715,
+        "unique_tiles": 435
+      },
+      {
+        "income_bracket": "$150k+",
+        "median_download_mbps": 192.576,
+        "observations": 159,
+        "unique_tiles": 80
+      }
+    ],
+    "SoCal": [
+      {
+        "income_bracket": "<$40k",
+        "median_download_mbps": 192.492,
+        "observations": 419,
+        "unique_tiles": 128
+      },
+      {
+        "income_bracket": "$40\u2013<70k",
+        "median_download_mbps": 196.175,
+        "observations": 3309,
+        "unique_tiles": 1392
+      },
+      {
+        "income_bracket": "$70\u2013<100k",
+        "median_download_mbps": 186.873,
+        "observations": 5402,
+        "unique_tiles": 2367
+      },
+      {
+        "income_bracket": "$100\u2013<150k",
+        "median_download_mbps": 185.283,
+        "observations": 5233,
+        "unique_tiles": 2346
+      },
+      {
+        "income_bracket": "$150k+",
+        "median_download_mbps": 179.008,
+        "observations": 1504,
+        "unique_tiles": 749
+      }
+    ],
+    "Bay_Area": [
+      {
+        "income_bracket": "<$40k",
+        "median_download_mbps": 206.75,
+        "observations": 61,
+        "unique_tiles": 9
+      },
+      {
+        "income_bracket": "$40\u2013<70k",
+        "median_download_mbps": 200.7955,
+        "observations": 312,
+        "unique_tiles": 118
+      },
+      {
+        "income_bracket": "$70\u2013<100k",
+        "median_download_mbps": 164.31,
+        "observations": 817,
+        "unique_tiles": 377
+      },
+      {
+        "income_bracket": "$100\u2013<150k",
+        "median_download_mbps": 181.4025,
+        "observations": 1944,
+        "unique_tiles": 892
+      },
+      {
+        "income_bracket": "$150k+",
+        "median_download_mbps": 195.693,
+        "observations": 2470,
+        "unique_tiles": 1159
+      }
+    ]
+  },
+  "poverty_brackets_2022_2024": {
+    "Central_Valley": [
+      {
+        "poverty_bracket": "<10%",
+        "median_download_mbps": 161.359,
+        "observations": 1195,
+        "unique_tiles": 699
+      },
+      {
+        "poverty_bracket": "10\u2013<20%",
+        "median_download_mbps": 184.6085,
+        "observations": 1180,
+        "unique_tiles": 715
+      },
+      {
+        "poverty_bracket": "20\u2013<30%",
+        "median_download_mbps": 170.24,
+        "observations": 508,
+        "unique_tiles": 319
+      },
+      {
+        "poverty_bracket": "30\u2013<40%",
+        "median_download_mbps": 190.7625,
+        "observations": 288,
+        "unique_tiles": 169
+      },
+      {
+        "poverty_bracket": "40%+",
+        "median_download_mbps": 176.996,
+        "observations": 92,
+        "unique_tiles": 50
+      }
+    ],
+    "SoCal": [
+      {
+        "poverty_bracket": "<10%",
+        "median_download_mbps": 181.682,
+        "observations": 7243,
+        "unique_tiles": 3452
+      },
+      {
+        "poverty_bracket": "10\u2013<20%",
+        "median_download_mbps": 186.89,
+        "observations": 5620,
+        "unique_tiles": 2421
+      },
+      {
+        "poverty_bracket": "20\u2013<30%",
+        "median_download_mbps": 198.719,
+        "observations": 2345,
+        "unique_tiles": 872
+      },
+      {
+        "poverty_bracket": "30\u2013<40%",
+        "median_download_mbps": 218.644,
+        "observations": 546,
+        "unique_tiles": 215
+      },
+      {
+        "poverty_bracket": "40%+",
+        "median_download_mbps": 222.622,
+        "observations": 245,
+        "unique_tiles": 70
+      }
+    ],
+    "Bay_Area": [
+      {
+        "poverty_bracket": "<10%",
+        "median_download_mbps": 189.0225,
+        "observations": 3760,
+        "unique_tiles": 1844
+      },
+      {
+        "poverty_bracket": "10\u2013<20%",
+        "median_download_mbps": 170.175,
+        "observations": 1469,
+        "unique_tiles": 603
+      },
+      {
+        "poverty_bracket": "20\u2013<30%",
+        "median_download_mbps": 205.671,
+        "observations": 294,
+        "unique_tiles": 84
+      },
+      {
+        "poverty_bracket": "30\u2013<40%",
+        "median_download_mbps": 226.614,
+        "observations": 57,
+        "unique_tiles": 23
+      },
+      {
+        "poverty_bracket": "40%+",
+        "median_download_mbps": 198.172,
+        "observations": 51,
+        "unique_tiles": 16
+      }
+    ]
+  },
+  "exploratory_regressions": {
+    "Central_Valley": {
+      "observations": 3245,
+      "unique_tiles": 1941,
+      "r_squared": 0.03280576229727317,
+      "coefficients": {
+        "Intercept": 2.379103305984658,
+        "C(urban_class)[T.Urban]": 0.49728449730101504,
+        "log_income": 0.18349236865390436,
+        "poverty_rate": 0.008104561154450782
+      }
+    },
+    "SoCal": {
+      "observations": 15867,
+      "unique_tiles": 6982,
+      "r_squared": 0.037548093828517204,
+      "coefficients": {
+        "Intercept": 2.937027852935967,
+        "C(urban_class)[T.Urban]": 0.9150072148933562,
+        "log_income": 0.10037658827239658,
+        "poverty_rate": 0.0090949518209817
+      }
+    },
+    "Bay_Area": {
+      "observations": 5604,
+      "unique_tiles": 2555,
+      "r_squared": 0.004095648245198591,
+      "coefficients": {
+        "Intercept": 3.519397218451992,
+        "C(urban_class)[T.Urban]": 0.23477998545404308,
+        "log_income": 0.11012825342941349,
+        "poverty_rate": 0.006959767301350763
+      }
+    }
+  },
+  "limitations": [
+    "Unweighted sampled tile-quarter observations, not a population-representative sample",
+    "Cached rectangular coverage limits county coverage",
+    "Repeated locations and changing annual samples",
+    "Official 2020 urban geography is fixed over time",
+    "Descriptive comparisons and exploratory models do not establish causality or predictor rankings"
+  ]
+}

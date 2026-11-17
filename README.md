@@ -1,126 +1,138 @@
 # Ookla Mobile Broadband Equity Analysis
+
 ### A CO³ Labs Study | Christian Olivares-Rodriguez
-> Analyzing the mobile broadband divide across California using real-world speed data from Ookla Open Data (2020–2025)
- 
----
- 
-## Overview
- 
-This project investigates mobile broadband performance disparities across three California regions — the **Central Valley**, **Bay Area**, and **Southern California** — using Ookla's open-source speed test dataset. Unlike ISP-reported coverage maps, Ookla data reflects actual speeds measured by real users, making it a more accurate picture of broadband access on the ground.
- 
-The analysis layers in **U.S. Census demographic data** (median income, poverty rate, urban/rural classification) to understand whether broadband inequity tracks with socioeconomic factors — or something else entirely.
- 
----
- 
-## Tech Stack
- 
-| Tool | Purpose |
-|------|---------|
-| Python 3.13 | Core language |
-| pandas | Data manipulation |
-| geopandas | Spatial joins and geographic analysis |
-| folium | Interactive maps |
-| matplotlib | Charts and visualizations |
-| AWS S3 (Ookla Open Data) | Source data pipeline |
-| U.S. Census API | Demographic data |
-| Census TIGER/Line Shapefiles | Census tract boundaries |
- 
----
- 
+
+This project examines observed mobile broadband performance across the Central Valley, Bay Area, and Southern California using Ookla Open Data from 2020–2025. It compares download speed, upload speed, and latency, then joins the observed locations to Census demographics and official urban-area boundaries.
+
+The results describe the sampled tile-quarter records. They are not estimates of service for every resident, a measure of household affordability, or evidence that income or geography causes a speed difference.
+
+## Latest Results
+
+The notebook was run from a fresh kernel on **November 13, 2026**. Its numerical results are also saved in [`reports/analysis_summary.json`](reports/analysis_summary.json).
+
+### Regional Download Comparison
+
+| Year | Central Valley (Mbps) | Bay Area (Mbps) | Southern California (Mbps) |
+|---|---:|---:|---:|
+| 2020 | 34.92 | 52.06 | 43.94 |
+| 2021 | 76.57 | 78.57 | 75.66 |
+| 2022 | 131.70 | 142.95 | 156.90 |
+| 2023 | 176.21 | 184.33 | 196.26 |
+| 2024 | 257.68 | 255.14 | 249.43 |
+| 2025 | 267.47 | 263.76 | 276.49 |
+
+The Bay Area sampled median was **49.1% higher** than the Central Valley median in 2020. The Central Valley sampled median exceeded the Bay Area median in **2024 and 2025**. In 2025, the medians were **267.47 Mbps** and **263.76 Mbps**, respectively. This change in the sampled ranking does not establish equivalent service across the two regions; the observed locations and annual sample sizes change.
+
+### Urban and Rural Samples
+
+The following comparison uses 2022–2024 observations and fixed 2020 Census urban-area boundaries. Each reported speed is the unweighted median of the observed tile-quarter download averages.
+
+| Region | Classification | Median download (Mbps) | Tile-quarter observations | Distinct tiles |
+|---|---|---:|---:|---:|
+| Central Valley | Urban | 185.80 | 2,660 | 1,513 |
+| Central Valley | Rural | 119.38 | 604 | 440 |
+| Southern California | Urban | 190.10 | 15,940 | 6,763 |
+| Southern California | Rural | 79.73 | 541 | 357 |
+| Bay Area | Urban | 182.16 | 5,514 | 2,417 |
+| Bay Area | Rural | 180.88 | 225 | 168 |
+
+Rural sampled medians were lower than urban medians in the Central Valley and Southern California. The Bay Area medians were close, but its rural comparison rests on **225 observations from 168 distinct tiles**. That small sample cannot establish equal service across the Bay Area's urban and rural communities.
+
+Observation counts include repeated measurements of the same location; distinct-tile counts show the geographic sample size. Locations without a qualifying observation are not evidence of missing service.
+
+### Income and Poverty Comparisons
+
+Median speeds do not rise consistently with tract income across all three regions, and the highest-poverty bracket is not uniformly the slowest. For example, the Bay Area's below-$40,000 income bracket has a median of **206.75 Mbps**, but contains only **61 observations from 9 distinct tiles**. Small brackets should not be treated as broad evidence about the populations living in those tracts.
+
+The notebook reports counts alongside bracket medians. Its exploratory regressions use standard errors clustered by tile to account for repeated observations at a location. These models describe associations within the sample; they do not establish causation or rank a “dominant predictor.”
+
+## Data and Methods
+
+| Source | Use |
+|---|---|
+| [Ookla Open Data](https://github.com/teamookla/ookla-open-data) | Quarterly mobile performance tiles, 2020–2025, retrieved from AWS S3 |
+| [2023 ACS five-year estimates](https://www.census.gov/data/developers/data-sets/acs-5year.html) | Tract median household income and poverty counts |
+| [2023 Census TIGER/Line tract boundaries](https://www2.census.gov/geo/tiger/TIGER2023/TRACT/) | Assign observed tile centers to California counties and Census tracts |
+| [2020 Census urban areas distributed in TIGER/Line 2023](https://www2.census.gov/geo/tiger/TIGER2023/UAC/) | Classify tile centers as Urban or Rural |
+
+- The three cached regional extracts contain **1,330,789** records before pooling and removing overlap. The extraction rectangles do not cover every part of every named county. County assignments make the regional groups mutually exclusive within the cached coverage.
+- All three extracts contain all **24 quarters from 2020 through 2025**, including the recovered 2021 Q3 records. Different annual sample sizes do not imply a partial year.
+- Records must have **at least 20 speed tests per tile-quarter**. This threshold limits very sparse records; it does not make the sample representative of a population.
+- Overlapping extracts are pooled and deduplicated using `quadkey`, `year`, and `quarter`. The county-assigned study sample contains **56,972** qualifying records.
+- Speeds are converted from kbps to Mbps. Regional comparisons use unweighted medians of tile-quarter averages. Records are not individual speed tests, unique devices, or people.
+- The demographic and urban/rural comparisons use **2022–2024** observations alongside the **2023 ACS five-year release**. This reduces, but does not eliminate, differences in the time periods represented.
+- A tile center is **Urban** when it intersects an official 2020 Census urban-area polygon and **Rural** otherwise. Tract land area is not used as a density proxy, and there is no Suburban category.
+- Poverty rate is `B17001_002E / B17001_001E × 100`: people below poverty divided by the population for whom poverty status is determined. A zero denominator produces a missing rate, not zero poverty.
+- Locations and sample composition vary over time. Repeated tiles and neighboring locations can be related. Comparisons and exploratory models should be read with these limits in mind.
+
+## Tools and Regional Definitions
+
+The analysis primarily uses pandas for preparation and aggregation, GeoPandas for spatial joins, Matplotlib for charts, and Folium for interactive maps. NumPy, PyArrow, the Census client, and statsmodels support numerical work, Parquet data, demographics, and exploratory regression. Exact versions are listed in `requirements.txt` and the analysis report.
+
+County assignments are mutually exclusive:
+- **Bay Area:** Alameda, Contra Costa, Marin, Napa, San Francisco, San Mateo, Santa Clara, Solano, Sonoma.
+- **Central Valley:** Shasta, Tehama, Glenn, Butte, Colusa, Sutter, Yuba, Yolo, Sacramento, San Joaquin, Stanislaus, Merced, Madera, Fresno, Kings, Tulare, Kern.
+- **Southern California:** Imperial, Los Angeles, Orange, Riverside, San Bernardino, San Diego, Santa Barbara, Ventura.
+
+These definitions assign observations to regions; they do not imply complete geographic coverage of the named counties. The corrected county-assigned sample is also used for the demographic joins, charts, and exploratory models.
+
+## Charts and Maps
+
+### Annual Download, Upload, and Latency
+
+![Annual regional performance](charts/yoy_equity_cv_vs_bay.png)
+
+### Download Gap Between the Bay Area and Central Valley
+
+![Difference in sampled median download speeds](charts/download_gap_bar.png)
+
+### Download Distribution by Region
+
+![Distribution of observed tile-quarter download averages](charts/download_distribution_by_region.png)
+
+### Urban and Rural Download Performance
+
+![Urban and rural sampled medians and observation counts](charts/equity_urban_rural.png)
+
+### Urban and Rural Comparison and Poverty Brackets
+
+![Urban and rural performance and poverty bracket comparisons](charts/equity_rural_poverty.png)
+
+### Income Brackets
+
+![Download performance by tract income bracket](charts/equity_income_vs_speed.png)
+
+The notebook displays regional Folium maps with markers for the fastest and slowest observed tile-quarter records. It also saves [`central_valley_county_map.html`](central_valley_county_map.html), which can be opened locally in a browser. These markers do not establish persistent best or worst service at a location.
+
 ## How to Run
- 
-### 1. Clone the repo
+
+Use Python 3.13 and run from the repository root.
+
 ```bash
-git clone https://github.com/Oli-Data/ookla-broadband-equity.git
-cd ookla-broadband-equity
+git clone https://github.com/Oli-Data/Ookla-Data.git
+cd Ookla-Data
+python3.13 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
 ```
- 
-### 2. Install dependencies
-```bash
-pip install pandas geopandas folium matplotlib numpy python-dotenv census
-```
- 
-### 3. Set up your Census API key
-Get a free API key at https://api.census.gov/data/key_signup.html
- 
-Create a `.env` file in the project root:
-```
+
+Create a local `.env` file containing your [Census API key](https://api.census.gov/data/key_signup.html):
+
+```text
 CENSUS_API_KEY=your_key_here
 ```
- 
-### 4. Run the notebook
-Open `ookla_data_project.ipynb` in Jupyter or VS Code.
- 
-> **Note:** The AWS pipeline cell (pulls raw Ookla data) is set to skip by default since the processed parquet files are large. To re-run the full pipeline, remove the `raise SystemExit` line at the top of that cell.
- 
+
+For a repeatable run from a fresh kernel:
+
+```bash
+python scripts/run_analysis.py
+```
+
+The runner executes every cell in order and saves the executed notebook after a successful run. It also refreshes the charts, saved map, and numerical summary. Alternatively, open `ookla_data_project.ipynb` in Jupyter or VS Code, select the environment with the installed dependencies, restart the kernel, and run all cells.
+
+`REBUILD_FROM_AWS = False` loads the existing regional Parquet files and checks period coverage, coordinates, and duplicate keys. Set it to `True` only when intentionally downloading and rebuilding the regional extracts; that path overwrites the regional Parquet files and requires substantially more time and memory.
+
+The first run may download Census data and boundaries. Reusable downloads are stored under `.ookla-cache/`. Keep `.env`, caches, backups, and the local environment out of version control. See [`ookla_etl.py`](ookla_etl.py) for coordinate normalization and the targeted 2021 Q3 recovery logic.
+
 ---
- 
-## Data Sources
- 
-| Source | Description |
-|--------|-------------|
-| [Ookla Open Data](https://github.com/teamookla/ookla-open-data) | Mobile performance tiles, 2020–2025, pulled from AWS S3 |
-| [U.S. Census ACS 5-Year Estimates (2023)](https://www.census.gov/data/developers/data-sets/acs-5year.html) | Median household income, poverty rate by census tract |
-| [Census TIGER/Line Shapefiles (2023)](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html) | Census tract boundaries for spatial join |
- 
-### Regions Covered
-- **Central Valley** — Bakersfield to Redding (35.4°N–40.6°N)
-- **Bay Area** — San Jose to Santa Rosa (36.9°N–38.9°N)
-- **Southern California** — San Diego to Santa Barbara (32.5°N–34.8°N)
-### Methodology Notes
-- All analysis filtered to tiles with **≥20 tests** for statistical robustness
-- Speed converted from kbps to Mbps throughout
-- Median used instead of mean for speed aggregations (more robust to outliers)
-- Census demographic overlay scoped to **2022–2024** to minimize temporal mismatch with 2023 ACS vintage
-- Urban/Rural classification derived from **census tract land area**, not population density (thresholds: Urban <10 km², Suburban <100 km², Rural ≥100 km²). This is a coarse proxy — a large, sparsely-populated tract and a large tract with a small town in it are classified the same way — and should be read as directional, not a precise density measure
-- The 2025 slice of the Ookla dataset has roughly half the tile count of other years (2020–2024 average ~2,700 tiles/region/year vs. ~1,150 in 2025), consistent with 2025 being a partial year at the time of data pull. Trend lines that end in 2025 should be read with that in mind
-- The rural/urban and income/poverty bracket comparisons below report **medians only**; per-bracket sample sizes are not printed in the notebook, and the rural bucket in particular is a small share of total tiles (roughly 10% in the Central Valley, and under 2% in the Bay Area and SoCal, based on the full 2020–2025 tile set). No correlation or regression test was run to formally rank predictors — the "stronger predictor" language below is a descriptive read of the medians, not a statistical result
----
- 
-## Key Findings
- 
-### 1. The Bay Area–Central Valley Download Gap Narrowed Sharply, But Never Closed
-From 2020 to 2025, the median download gap between the Bay Area and Central Valley shrank from **32.8%** (Bay Area ahead) to **0.5%** — effective parity. The gap did not shrink in a straight line: it widened again in 2023 (to 9.1%) before continuing to narrow. At no point in the 2020–2025 window did Central Valley's median download speed exceed the Bay Area's.
- 
-Latency followed a similar pattern: Central Valley started 2ms behind the Bay Area in 2020, the two converged by 2022, and by 2025 Central Valley was measured as slightly *faster* (23ms vs. 24ms). Latency, like download speed, converged rather than "persisting" as a gap.
- 
-*(Note: 2025 is a partial-year slice — see Methodology Notes — so the near-zero final-year gap should be treated as provisional rather than a confirmed close.)*
- 
-### 2. Rural Location Tracks More Consistently With Slower Speeds Than Income Does
-Across all three regions, rural tiles had the lowest median download speeds, and the pattern was consistent region to region — unlike the income and poverty comparisons below, which varied in direction by region:
-- Central Valley: **65.8 Mbps** rural vs. 193.3 Mbps urban
-- SoCal: **56.2 Mbps** rural vs. 193.5 Mbps urban
-- Bay Area: **138.1 Mbps** rural vs. 189.4 Mbps urban — even rural Bay Area benefits from proximity to dense infrastructure
-Rural tiles are a small fraction of the dataset (see Methodology Notes), so this reads as a consistent directional signal rather than a precisely quantified effect.
- 
-### 3. Income Shows No Consistent Relationship With Mobile Speed
-Lower-income tracts did not consistently have slower speeds, and the pattern differed by region. In the Central Valley and SoCal, the lowest income bracket (<$40k) had *higher* median speeds than the middle brackets; in the Bay Area the same was true, with the <$40k bracket posting the highest median speed of any bracket (226.8 Mbps). One plausible explanation is that low-income tracts in California tend to cluster in dense urban areas with stronger tower coverage — but this notebook doesn't test that explanation directly.
- 
-Poverty rate showed a similarly inconsistent pattern: Central Valley's highest-poverty tracts (40%+) had the *lowest* median speed of any bracket, while SoCal's highest-poverty tracts had among the *highest*.
- 
-### 4. The Data Points Toward a Geographic Divide, More Than a Socioeconomic One
-Taken together, the rural/urban comparison is the one pattern that holds consistently across all three regions, while the income and poverty comparisons don't move in a consistent direction. That's suggestive of a rural infrastructure gap rather than an affordability gap — but with medians-only reporting, no significance testing, and a rural sample that's a small slice of the data, this should be read as a hypothesis the data is consistent with, not a settled conclusion. Policy interventions focused purely on affordability may miss the communities most underserved by mobile networks, though a more rigorous statistical pass (sample sizes per bracket, a regression controlling for both income and geography together) would strengthen this claim.
- 
----
- 
-## Charts
- 
-### Year-Over-Year: Download, Upload & Latency
-![YoY Equity Chart](charts/yoy_equity_cv_vs_bay.png)
- 
-### Download Speed Gap: Bay Area vs Central Valley
-![Download Gap Bar Chart](charts/download_gap_bar.png)
- 
-### Download Speed Distribution by Region
-![Distribution Chart](charts/download_distribution_by_region.png)
- 
-### Speed vs Median Household Income
-![Income vs Speed](charts/equity_income_vs_speed.png)
- 
-### Rural/Urban Classification & Poverty Rate
-![Rural Poverty Chart](charts/equity_rural_poverty.png)
- 
-> The notebook also generates three interactive Folium maps (fastest/slowest tile markers, a dead-zone heatmap, and a fast-zone heatmap for the Central Valley) that aren't included as static images here. Worth adding if they're meant to be part of the published writeup — see the notebook cells under "Dead Zones."
- 
----
-*Analysis by Christian Olivares | CO³ Labs LLC*
+Analysis by Christian Olivares-Rodriguez | CO³ Labs
